@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio's</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #ffffff;
+      color: #001f3f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+      overflow-x: hidden;
+      position: relative;
+      text-align: center;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/white-wall-3.png');
+      opacity: 0.05;
+      z-index: 0;
+    }
+
+    .decorative {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(0, 31, 63, 0.08);
+      z-index: 0;
+      animation: float 10s ease-in-out infinite;
+    }
+
+    .circle1 {
+      width: 200px;
+      height: 200px;
+      top: 10%;
+      left: 5%;
+    }
+
+    .circle2 {
+      width: 150px;
+      height: 150px;
+      bottom: 15%;
+      right: 10%;
+    }
+
+    .circle3 {
+      width: 100px;
+      height: 100px;
+      top: 60%;
+      left: 20%;
+    }
+
+    .circle4 {
+      width: 180px;
+      height: 180px;
+      top: 30%;
+      right: 15%;
+    }
+
+    .circle5 {
+      width: 120px;
+      height: 120px;
+      bottom: 5%;
+      left: 40%;
+    }
+
+    .divider {
+      width: 80%;
+      height: 2px;
+      background: linear-gradient(to right, #001f3f, transparent);
+      margin: 30px auto;
+      z-index: 1;
+    }
+
+    h1 {
+      color: #001f3f;
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      z-index: 1;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      opacity: 0;
+      animation: fadeIn 1.5s ease forwards;
+      animation-delay: 0.5s;
+      z-index: 1;
+    }
+
+    li {
+      margin: 15px 0;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    li:nth-child(1) { animation-delay: 1s; }
+    li:nth-child(2) { animation-delay: 1.2s; }
+    li:nth-child(3) { animation-delay: 1.4s; }
+    li:nth-child(4) { animation-delay: 1.6s; }
+
+    a {
+      text-decoration: none;
+      color: #001f3f;
+      background-color: #f0f8ff;
+      padding: 12px 24px;
+      border-radius: 10px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      border: 1px solid #001f3f;
+      display: inline-block;
+      z-index: 1;
+    }
+
+    a:hover {
+      background-color: #001f3f;
+      color: #ffffff;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    /* Profile Section */
+    .profile {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .profile img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 3px solid #001f3f;
+      object-fit: cover;
+      margin-bottom: 15px;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .profile h2 {
+      font-size: 1.8rem;
+      margin: 0 0 10px;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 0.3s;
+    }
+
+    .contact-info {
+      margin-bottom: 15px;
+      font-size: 1rem;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 0.6s;
+    }
+
+    .contact-info a {
+      color: #001f3f;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .contact-info a:hover {
+      color: #f0a500;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 0.9s;
+    }
+
+    .social-links a {
+      color: #001f3f;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: #f0a500;
+    }
+
+    .social-links svg {
+      width: 28px;
+      height: 28px;
+      fill: currentColor;
+    }
+
+    /* Scroll To Top Button */
+    #scrollToTopBtn {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      width: 50px;
+      height: 50px;
+      background-color: #001f3f;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+      z-index: 100;
+      animation: bounce 2s infinite;
+    }
+
+    #scrollToTopBtn.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    #scrollToTopBtn:hover {
+      background-color: #f0a500;
+      color: #001f3f;
+      transform: scale(1.1);
+      animation-play-state: paused;
+    }
+
+    #scrollToTopBtn svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="decorative circle1"></div>
+  <div class="decorative circle2"></div>
+  <div class="decorative circle3"></div>
+  <div class="decorative circle4"></div>
+  <div class="decorative circle5"></div>
+
+  <h1>My Portfolio's</h1>
+
+  <div class="profile">
+    <img src="profile.jpg" alt="Profile Photo" />
+    <h2>Jatin .S. Tandel</h2>
+    <div class="contact-info">
+      📧 <a href="mailto:jatintandel2017@gmail.com">jatintandel2017@gmail.com</a>
+    </div>
+    <div class="social-links" aria-label="Social Links">
+      <a href="https://github.com/JatinTandel" target="_blank" rel="noopener" aria-label="GitHub Profile">
+        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <title>GitHub</title>
+          <path d="M12 0C5.37 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577
+            0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.745.083-.729.083-.729
+            1.205.085 1.838 1.237 1.838 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.3-5.466-1.335-5.466-5.93
+            0-1.31.47-2.38 1.236-3.22-.124-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.52 11.52 0 013.003-.404c1.02.005
+            2.045.138 3.003.404 2.29-1.552 3.297-1.23 3.297-1.23.654 1.653.242 2.873.12 3.176.77.84 1.235 1.91 1.235 3.22
+            0 4.61-2.807 5.625-5.48 5.922.43.372.823 1.103.823 2.222
+            0 1.606-.015 2.898-.015 3.293 0 .32.217.694.825.576C20.565 21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </a>
+      <a href="https://linkedin.com/in/JatinTandel" target="_blank" rel="noopener" aria-label="LinkedIn Profile">
+        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <title>LinkedIn</title>
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.327-.026-3.037-1.852-3.037-1.853 0-2.136
+            1.445-2.136 2.939v5.667h-3.554V9h3.414v1.561h.049c.476-.9
+            1.637-1.85 3.37-1.85 3.602 0 4.268 2.37 4.268 5.455v6.286zM5.337
+            7.433a2.062 2.062 0 11.001-4.124 2.062 2.062 0 01-.001
+            4.124zm1.777 13.019H3.56V9h3.554v11.452zM22.225
+            0H1.771C.792 0 0 .771 0 1.723v20.554C0 23.229.792 24 1.771
+            24h20.451C23.2 24 24 23.229 24 22.277V1.723C24
+            .771 23.2 0 22.225 0z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <ul>
+    <li><a href="jatin.html" target="_blank">Assignment 1</a></li>
+    <li><a href="jatin2.html" target="_blank">Assignment 2</a></li>
+    <li><a href="jatin3.html" target="_blank">Assignment 3</a></li>
+    <li><a href="jatin4.html" target="_blank">Assignment 4</a></li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- Scroll To Top Button -->
+  <button id="scrollToTopBtn" aria-label="Scroll to top">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" 
+      stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" >
+      <line x1="12" y1="19" x2="12" y2="5"></line>
+      <polyline points="5 12 12 5 19 12"></polyline>
+    </svg>
+  </button>
+
+  <script>
+    // Show button after scrolling 100px
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        scrollToTopBtn.classList.add('show');
+      } else {
+        scrollToTopBtn.classList.remove('show');
+      }
+    });
+
+    // Smooth scroll to top
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  </script>
+</body>
+</html>
