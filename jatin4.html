@@ -178,7 +178,14 @@
         </div>
       </div>
 
-      <form action="https://formspree.io/f/yourformid" method="POST" class="mt-8 space-y-4" data-aos="fade-up">
+      <form action="https://formspree.io/f/your_actual_form_id" method="POST" class="mt-8 space-y-4" data-aos="fade-up" id="contactForm">
+  <input type="text" name="name" placeholder="Your Name" required class="w-full p-3 rounded bg-gray-200 text-black" />
+  <input type="email" name="email" placeholder="Your Email" required class="w-full p-3 rounded bg-gray-200 text-black" />
+  <textarea name="message" rows="5" placeholder="Your Message" required class="w-full p-3 rounded bg-gray-200 text-black"></textarea>
+  <button type="submit" class="bg-gray-200 text-black px-6 py-2 rounded font-bold hover:bg-yellow-300 transition">Send Message</button>
+  <p id="formStatus" class="text-sm font-semibold mt-2"></p>
+</form>
+
         <input type="text" name="name" placeholder="Your Name" required class="w-full p-3 rounded bg-gray-200 text-black" />
         <input type="email" name="email" placeholder="Your Email" required class="w-full p-3 rounded bg-gray-200 text-black" />
         <textarea name="message" rows="5" placeholder="Your Message" required class="w-full p-3 rounded bg-gray-200 text-black"></textarea>
@@ -200,6 +207,74 @@
       <button onclick="handleCookieConsent(false)" class="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400 font-semibold transition">Decline</button>
     </div>
   </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    window.addEventListener('load', () => {
+      document.getElementById('loader').style.display = 'none';
+    });
+
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    window.onscroll = function () {
+      scrollToTopBtn.style.display = (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) ? "block" : "none";
+    };
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const consent = localStorage.getItem('cookieConsent');
+      if (!consent) {
+        document.getElementById('cookieBanner').style.display = 'flex';
+      }
+    });
+
+    function handleCookieConsent(accepted) {
+      localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
+      document.getElementById('cookieBanner').style.display = 'none';
+    }
+
+    // Formspree submission handling
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('formStatus');
+
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const data = new FormData(form);
+      const action = form.getAttribute("action");
+
+      try {
+        const response = await fetch(action, {
+          method: "POST",
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          status.innerHTML = "✅ Thanks for your message!";
+          status.classList.remove("text-red-600");
+          status.classList.add("text-green-600");
+          form.reset();
+        } else {
+          const result = await response.json();
+          if (result.errors) {
+            status.innerHTML = "⚠️ " + result.errors.map(error => error.message).join(", ");
+          } else {
+            status.innerHTML = "⚠️ Something went wrong. Please try again.";
+          }
+          status.classList.remove("text-green-600");
+          status.classList.add("text-red-600");
+        }
+      } catch (error) {
+        status.innerHTML = "❌ Network error. Please try again later.";
+        status.classList.remove("text-green-600");
+        status.classList.add("text-red-600");
+      }
+    });
 
   <!-- AOS Script -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
