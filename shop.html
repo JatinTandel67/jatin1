@@ -7,75 +7,72 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    .fade-in { animation: fadeIn 0.5s ease-in-out forwards; }
-    .bounce { animation: bounce 0.4s ease; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .fade-in-up { animation: fadeInUp 0.4s ease-out forwards; }
+    .fade-out { animation: fadeOut 0.4s ease-in forwards; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeOut {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(-10px); }
+    }
   </style>
 </head>
-<body class="bg-[#f8f9fa] text-gray-900 font-[Poppins]">
+<body class="bg-gradient-to-b from-[#f0f4f8] to-[#ffffff] text-gray-900 font-[Poppins] min-h-screen">
+
   <!-- Header -->
-  <header class="bg-[#001f3f] shadow-md py-4 px-6 text-white flex justify-between items-center">
-    <h1 class="text-2xl font-bold">🛍️ Jatin's Shopping Store</h1>
-    <div class="flex items-center space-x-4">
-      <a href="index.html" class="bg-yellow-400 text-[#001f3f] px-4 py-1 rounded-md text-sm font-semibold hover:bg-yellow-300 transition">← Portfolio</a>
-      <a href="cart.html" class="bg-blue-500 px-3 py-1 rounded hover:bg-blue-400 text-white text-sm">🛒 Cart</a>
-      <a href="favourites.html" class="bg-pink-500 px-3 py-1 rounded hover:bg-pink-400 text-white text-sm">❤️ Favorites</a>
-      <a href="checkout.html" class="bg-green-500 px-3 py-1 rounded hover:bg-green-400 text-white text-sm">🧾 Checkout</a>
+  <header class="bg-[#001f3f] shadow-md py-4 px-6 text-white flex justify-between items-center sticky top-0 z-50">
+    <h1 class="text-2xl font-bold tracking-wide">🛕️ Jatin's Clothing Co.</h1>
+    <div class="flex items-center space-x-3">
+      <a href="jatin4.html" class="bg-yellow-400 text-[#001f3f] px-4 py-1 rounded-md text-sm font-semibold hover:bg-yellow-300 transition">← Portfolio</a>
+      <a href="cart.html" class="bg-blue-500 px-3 py-1 rounded-md hover:bg-blue-400 text-white text-sm">🛒 Cart</a>
+      <a href="favourites.html" class="bg-pink-500 px-3 py-1 rounded-md hover:bg-pink-400 text-white text-sm">❤️ Favorites</a>
+      <a href="checkout.html" class="bg-green-500 px-3 py-1 rounded-md hover:bg-green-400 text-white text-sm">🧾 Checkout</a>
     </div>
   </header>
 
-  <main class="py-10 px-6 max-w-7xl mx-auto space-y-16">
-    <!-- Product Section -->
+  <!-- Main Content -->
+  <main class="py-14 px-6 max-w-7xl mx-auto space-y-12 fade-in">
+    <!-- Controls -->
+    <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-10">
+      <div>
+        <label for="filter" class="font-semibold mr-2">Filter by:</label>
+        <select id="filter" class="border border-gray-300 rounded-md px-3 py-1">
+          <option value="all">All</option>
+          <option value="hoodie">Hoodies</option>
+          <option value="shoes">Shoes</option>
+          <option value="watch">Watches</option>
+          <option value="tshirt">T-Shirts</option>
+          <option value="jacket">Jackets</option>
+          <option value="pants">Pants</option>
+        </select>
+      </div>
+      <div>
+        <label for="sort" class="font-semibold mr-2">Sort by:</label>
+        <select id="sort" class="border border-gray-300 rounded-md px-3 py-1">
+          <option value="default">Default</option>
+          <option value="low-high">Price: Low to High</option>
+          <option value="high-low">Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
     <section>
-      <h2 class="text-3xl font-bold text-gray-700 mb-8">Featured Products</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="product bg-white rounded-lg shadow-md p-4" data-name="Classic Hoodie" data-price=<"4599">
-          <img src="hoodies.jpg" alt="Hoodie" class="w-full h-48 object-cover rounded">
-          <h3 class="text-xl font-semibold mt-4">Classic Hoodie</h3>
-          <p class="text-sm text-gray-600">Warm, stylish, and comfy.</p>
-          <div class="mt-3 flex justify-between items-center">
-            <span class="font-bold text-lg text-green-600">₹4599</span>
-            <div class="space-x-2">
-              <button class="favorite-btn text-sm text-yellow-500 hover:underline">❤️ Favorite</button>
-              <button class="cart-btn text-sm text-blue-600 hover:underline">🛒 Add to Cart</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="product bg-white rounded-lg shadow-md p-4" data-name="Running Sneakers" data-price="14999">
-          <img src="nike.jpg" alt="Sneakers" class="w-full h-48 object-cover rounded">
-          <h3 class="text-xl font-semibold mt-4">Running Sneakers</h3>
-          <p class="text-sm text-gray-600">Lightweight & durable.</p>
-          <div class="mt-3 flex justify-between items-center">
-            <span class="font-bold text-lg text-green-600">₹14,999</span>
-            <div class="space-x-2">
-              <button class="favorite-btn text-sm text-yellow-500 hover:underline">❤️ Favorite</button>
-              <button class="cart-btn text-sm text-blue-600 hover:underline">🛒 Add to Cart</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="product bg-white rounded-lg shadow-md p-4" data-name="Analog Watch" data-price="35999">
-          <img src="seiko.jpg" alt="Watch" class="w-full h-48 object-cover rounded">
-          <h3 class="text-xl font-semibold mt-4">Smart Watch</h3>
-          <p class="text-sm text-gray-600">Fitness tracking with style.</p>
-          <div class="mt-3 flex justify-between items-center">
-            <span class="font-bold text-lg text-green-600">₹35,999</span>
-            <div class="space-x-2">
-              <button class="favorite-btn text-sm text-yellow-500 hover:underline">❤️ Favorite</button>
-              <button class="cart-btn text-sm text-blue-600 hover:underline">🛒 Add to Cart</button>
-            </div>
-          </div>
-        </div>
+      <h2 class="text-4xl font-bold text-gray-800 mb-10 text-center">👕 Featured Apparel</h2>
+      <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <!-- Products will be injected by JS -->
       </div>
     </section>
   </main>
 
-  <footer class="bg-[#001f3f] text-white py-4 text-center">
-    <p>© 2025 Jatin S. Tandel | Powered by creativity</p>
+  <!-- Footer -->
+  <footer class="bg-[#001f3f] text-white py-5 text-center mt-20">
+    <p class="text-sm">© 2025 Jatin S. Tandel | Powered by creativity & style</p>
   </footer>
 
+  <!-- JavaScript -->
   <script>
     const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
@@ -85,25 +82,106 @@
       localStorage.setItem("favorites", JSON.stringify(favorites));
     };
 
-    document.querySelectorAll(".product").forEach(product => {
-      const name = product.getAttribute("data-name");
-      const price = parseInt(product.getAttribute("data-price"));
+    const showConfirmation = (element, text, bgColor = 'bg-green-500') => {
+      const badge = document.createElement("div");
+      badge.textContent = text;
+      badge.className = `absolute top-3 right-3 text-white text-xs px-3 py-1 rounded-full ${bgColor} fade-in-up`;
+      element.classList.add("relative");
+      element.appendChild(badge);
 
-      product.querySelector(".cart-btn").addEventListener("click", () => {
-        cartItems.push({ name, price });
+      setTimeout(() => badge.classList.replace("fade-in-up", "fade-out"), 1000);
+      setTimeout(() => badge.remove(), 1400);
+    };
+
+    const productList = [
+      { name: "Classic Hoodie", price: 4599, category: "hoodie", image: "hoodies.jpg" },
+      { name: "Running Sneakers", price: 14999, category: "shoes", image: "nike.jpg" },
+      { name: "Smart Watch", price: 35999, category: "watch", image: "seiko.jpg" },
+      { name: "Denim Jacket", price: 7999, category: "jacket", image: "denim.jpg" },
+      { name: "Graphic T-Shirt", price: 1999, category: "tshirt", image: "graphic.jpg" },
+      { name: "Leather Boots", price: 9999, category: "shoes", image: "boots.jpg" },
+      { name: "Cargo Pants", price: 2999, category: "pants", image: "cargo.jpg" },
+      { name: "Flannel Shirt", price: 2499, category: "tshirt", image: "flannel.jpg" },
+      { name: "Winter Coat", price: 11999, category: "jacket", image: "coat.jpg" },
+      { name: "Slim Fit Jeans", price: 3499, category: "pants", image: "jeans.jpg" },
+      { name: "Sneaker X", price: 13999, category: "shoes", image: "sneakerx.jpg" },
+      { name: "Wool Sweater", price: 4999, category: "hoodie", image: "sweater.jpg" },
+      { name: "Analog Watch", price: 25999, category: "watch", image: "analog.jpg" },
+      { name: "Cotton T-Shirt", price: 1499, category: "tshirt", image: "cotton.jpg" },
+      { name: "Rain Jacket", price: 8999, category: "jacket", image: "rainjacket.jpg" },
+      { name: "Track Pants", price: 2799, category: "pants", image: "trackpants.jpg" },
+      { name: "Designer Hoodie", price: 6599, category: "hoodie", image: "designerhoodie.jpg" },
+      { name: "Premium Watch", price: 49999, category: "watch", image: "premiumwatch.jpg" },
+      { name: "Canvas Shoes", price: 4599, category: "shoes", image: "canvas.jpg" },
+      { name: "Plaid Shirt", price: 1999, category: "tshirt", image: "plaid.jpg" }
+    ];
+
+    const productGrid = document.getElementById("productGrid");
+
+    const createProductCard = (product) => {
+      const div = document.createElement("div");
+      div.className = "product bg-white rounded-2xl shadow-lg p-5 transition duration-300";
+      div.setAttribute("data-name", product.name);
+      div.setAttribute("data-price", product.price);
+      div.setAttribute("data-category", product.category);
+      div.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" class="w-full h-56 object-cover rounded-xl">
+        <h3 class="text-2xl font-semibold mt-4">${product.name}</h3>
+        <p class="text-sm text-gray-600 mb-2">Stylish and comfortable.</p>
+        <div class="mt-3 flex justify-between items-center">
+          <span class="font-bold text-xl text-green-600">₹${product.price.toLocaleString()}</span>
+          <div class="space-x-2">
+            <button class="favorite-btn bg-yellow-100 text-yellow-600 px-3 py-1 rounded hover:bg-yellow-200 text-sm">❤️ Favorite</button>
+            <button class="cart-btn bg-blue-100 text-blue-600 px-3 py-1 rounded hover:bg-blue-200 text-sm">🛒 Add to Cart</button>
+          </div>
+        </div>
+      `;
+      productGrid.appendChild(div);
+
+      div.querySelector(".cart-btn").addEventListener("click", () => {
+        cartItems.push({ name: product.name, price: product.price });
         saveToStorage();
-        alert(`${name} added to cart.`);
+        showConfirmation(div, "✔ Added to Cart", "bg-blue-600");
       });
 
-      product.querySelector(".favorite-btn").addEventListener("click", () => {
-        favorites.push({ name, price });
+      div.querySelector(".favorite-btn").addEventListener("click", () => {
+        favorites.push({ name: product.name, price: product.price });
         saveToStorage();
-        alert(`${name} added to favorites.`);
+        showConfirmation(div, "❤️ Favorited", "bg-pink-500");
       });
-    });
+    };
+
+    productList.forEach(createProductCard);
+
+    const filterSelect = document.getElementById("filter");
+    const sortSelect = document.getElementById("sort");
+
+    const applyFiltersAndSorting = () => {
+      const filterValue = filterSelect.value;
+      const sortValue = sortSelect.value;
+
+      let products = Array.from(productGrid.children);
+
+      products.forEach(p => {
+        const category = p.getAttribute("data-category");
+        p.style.display = (filterValue === "all" || filterValue === category) ? "block" : "none";
+      });
+
+      let visibleProducts = products.filter(p => p.style.display !== "none");
+
+      visibleProducts.sort((a, b) => {
+        const priceA = parseInt(a.getAttribute("data-price"));
+        const priceB = parseInt(b.getAttribute("data-price"));
+        if (sortValue === "low-high") return priceA - priceB;
+        if (sortValue === "high-low") return priceB - priceA;
+        return 0;
+      });
+
+      visibleProducts.forEach(p => productGrid.appendChild(p));
+    };
+
+    filterSelect.addEventListener("change", applyFiltersAndSorting);
+    sortSelect.addEventListener("change", applyFiltersAndSorting);
   </script>
 </body>
 </html>
-
-
-
